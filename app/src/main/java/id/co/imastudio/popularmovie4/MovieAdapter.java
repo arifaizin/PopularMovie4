@@ -1,6 +1,8 @@
 package id.co.imastudio.popularmovie4;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +15,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.co.imastudio.popularmovie4.model.ResultsItem;
+
 /**
  * Created by idn on 2/3/2018.
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     Context context;
-    List<MovieModel> listMovie = new ArrayList<>();
+    List<ResultsItem> listMovie = new ArrayList<>();
 
     //constructor
-    public MovieAdapter(Context context, List<MovieModel> listMovie) {
+    public MovieAdapter(Context context, List<ResultsItem> listMovie) {
         this.context = context;
         this.listMovie = listMovie;
     }
@@ -38,11 +42,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     //set data
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textJudul.setText(listMovie.get(position).getJudulMovie());
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.textJudul.setText(listMovie.get(position).getTitle());
         Picasso.with(context)
-                .load("https://image.tmdb.org/t/p/w500/"+listMovie.get(position).getPosterMovie())
+                .load("https://image.tmdb.org/t/p/w500/"+listMovie.get(position).getPosterPath())
                 .into(holder.imagePoster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pindah = new Intent(context, DetailMovieActivity.class);
+                //kirim data
+                pindah.putParcelableArrayListExtra("DATA_MOVIE", (ArrayList<? extends Parcelable>) listMovie);
+                pindah.putExtra("POSISI", position);
+                context.startActivity(pindah);
+            }
+        });
     }
 
     //jumlah list

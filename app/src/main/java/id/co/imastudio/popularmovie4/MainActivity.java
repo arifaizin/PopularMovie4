@@ -6,6 +6,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import id.co.imastudio.popularmovie4.fragment.FavoriteFragment;
+import id.co.imastudio.popularmovie4.fragment.PopularFragment;
+import id.co.imastudio.popularmovie4.fragment.TopRatedFragment;
+
 public class MainActivity extends AppCompatActivity {
 
 

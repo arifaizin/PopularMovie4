@@ -1,4 +1,4 @@
-package id.co.imastudio.popularmovie4;
+package id.co.imastudio.popularmovie4.connection;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

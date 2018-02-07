@@ -1,5 +1,6 @@
-package id.co.imastudio.popularmovie4;
+package id.co.imastudio.popularmovie4.connection;
 
+import id.co.imastudio.popularmovie4.model.ResponseModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

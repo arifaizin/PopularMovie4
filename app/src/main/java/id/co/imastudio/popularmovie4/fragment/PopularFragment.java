@@ -1,4 +1,4 @@
-package id.co.imastudio.popularmovie4;
+package id.co.imastudio.popularmovie4.fragment;
 
 
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.co.imastudio.popularmovie4.MovieAdapter;
+import id.co.imastudio.popularmovie4.R;
+import id.co.imastudio.popularmovie4.connection.RetrofitConfig;
+import id.co.imastudio.popularmovie4.model.ResponseModel;
+import id.co.imastudio.popularmovie4.model.ResultsItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +34,7 @@ public class PopularFragment extends Fragment {
     }
 
     RecyclerView recycler;
-    List<MovieModel> listMovie = new ArrayList<>();
+    List<ResultsItem> listMovie = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,11 +47,11 @@ public class PopularFragment extends Fragment {
         //fori
 //        for (int i = 0; i < 20; i++) {
 //            //pake constructor
-//            MovieModel movie1 = new MovieModel("https://id.bmscdn.com/events/moviecard/ET00005344.jpg", "Dilan");
+//            ResultsItem movie1 = new ResultsItem("https://id.bmscdn.com/events/moviecard/ET00005344.jpg", "Dilan");
 //            listMovie.add(movie1);
 //
 //            //pake setter
-//            MovieModel movie2 = new MovieModel();
+//            ResultsItem movie2 = new ResultsItem();
 //            movie2.setJudulMovie("Dilan 2");
 //            movie2.setPosterMovie("https://id.bmscdn.com/events/moviecard/ET00005344.jpg");
 //            listMovie.add(movie2);
@@ -58,7 +63,7 @@ public class PopularFragment extends Fragment {
         recycler.setAdapter(new MovieAdapter(getActivity(), listMovie));
 
         // 3 Layout Manager
-        recycler.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        recycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
         return view;
     }
@@ -73,13 +78,13 @@ public class PopularFragment extends Fragment {
                     recycler.setAdapter(new MovieAdapter(getActivity(), listMovie));
 
                 } else {
-                    Toast.makeText(getActivity(), "Response is not successfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Response is not successfull" + response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                Toast.makeText(getActivity(), "Response Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Response Failure" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
